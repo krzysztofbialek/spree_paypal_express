@@ -27,6 +27,7 @@ module Spree
     end
 
     def paypal_payment
+      Rails.logger.warn "!!!!!!!!!!!!!!!!!" + " " + "#{spree.root_url}" + "!!!!!!!!!!!!!!!!!!!!"
       load_order
       opts = all_opts(@order, params[:payment_method_id], 'payment')
 
@@ -305,7 +306,7 @@ module Spree
         shipping_total = (order.ship_total * 100).to_i
       end
 
-      puts "!!!!!!!!!!!!!!!!!" + " " + "#{spree.root_url}" + "!!!!!!!!!!!!!!!!!!!!"
+      Rails.logger.warn "!!!!!!!!!!!!!!!!!" + " " + "#{spree.root_url}" + "!!!!!!!!!!!!!!!!!!!!"
 
       opts = { :return_url        => paypal_confirm_order_checkout_url(order, :payment_method_id => payment_method_id),
                :cancel_return_url => edit_order_checkout_url(order, :state => :payment),
